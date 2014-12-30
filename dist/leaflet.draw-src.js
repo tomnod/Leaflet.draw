@@ -171,6 +171,10 @@ L.Draw.Feature = L.Handler.extend({
 	setOptions: function (options) {
 		L.setOptions(this, options);
 	},
+	
+	_fireChangedEvent: function (layer) {
+		return this._map.fire('draw:drawchange', { layer: layer, layerType: this.type });
+	},
 
 	_fireCreatedEvent: function (layer) {
 		this._map.fire('draw:created', { layer: layer, layerType: this.type });
@@ -393,6 +397,8 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 		this._clearGuides();
 
 		this._updateTooltip();
+
+		this._fireChangedEvent();
 	},
 
 	_onMouseDown: function (e) {
@@ -610,6 +616,11 @@ L.Draw.Polyline = L.Draw.Feature.extend({
 		if (this._markers.length > 1) {
 			this._markers[this._markers.length - 1].off('click', this._finishShape, this);
 		}
+	},
+	
+	_fireChangedEvent: function () {
+		var poly = new this.Poly(this._poly.getLatLngs(), this.options.shapeOptions);
+		return L.Draw.Feature.prototype._fireChangedEvent.call(this, poly);
 	},
 
 	_fireCreatedEvent: function () {
@@ -855,6 +866,11 @@ L.Draw.Rectangle = L.Draw.SimpleShape.extend({
 			this._shape.setBounds(new L.LatLngBounds(this._startLatLng, latlng));
 		}
 	},
+	
+	_fireChangedEvent: function () {
+		var rectangle = new L.Rectangle(this._shape.getBounds(), this.options.shapeOptions);
+		return L.Draw.SimpleShape.prototype._fireChangedEvent.call(this, rectangle);
+	},
 
 	_fireCreatedEvent: function () {
 		var rectangle = new L.Rectangle(this._shape.getBounds(), this.options.shapeOptions);
@@ -916,6 +932,11 @@ L.Draw.Circle = L.Draw.SimpleShape.extend({
 		} else {
 			this._shape.setRadius(this._startLatLng.distanceTo(latlng));
 		}
+	},
+	
+	_fireChangedEvent: function() {
+		var circle = new L.Circle(this._startLatLng, this._shape.getRadius(), this.options.shapeOptions);
+		return L.Draw.SimpleShape.prototype._fireChangedEvent.call(this, circle);
 	},
 
 	_fireCreatedEvent: function () {
@@ -1042,6 +1063,11 @@ L.Draw.Marker = L.Draw.Feature.extend({
 		}
 	},
 
+	_fireChangedEvent: function () {
+		var marker = new L.Marker(this._marker.getLatLng(), { icon: this.options.icon });
+		return L.Draw.Feature.prototype._fireChangedEvent.call(this, marker);
+	},
+
 	_fireCreatedEvent: function () {
 		var marker = new L.Marker(this._marker.getLatLng(), { icon: this.options.icon });
 		L.Draw.Feature.prototype._fireCreatedEvent.call(this, marker);
@@ -1157,6 +1183,7 @@ L.Edit.Poly = L.Handler.extend({
 	_fireEdit: function () {
 		this._poly.edited = true;
 		this._poly.fire('edit');
+		this._map.fire('draw:editchange', { layer: this._poly });
 	},
 
 	_onMarkerDrag: function (e) {
@@ -1432,6 +1459,7 @@ L.Edit.SimpleShape = L.Handler.extend({
 	_fireEdit: function () {
 		this._shape.edited = true;
 		this._shape.fire('edit');
+		this._map.fire('draw:editchange', { layer: this._shape });
 	},
 
 	_onMarkerDrag: function (e) {
