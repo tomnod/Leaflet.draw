@@ -1183,7 +1183,7 @@ L.Edit.Poly = L.Handler.extend({
 	_fireEdit: function () {
 		this._poly.edited = true;
 		this._poly.fire('edit');
-		this._map.fire('draw:editchange', { layer: this._poly });
+		this._poly._map.fire('draw:editchange', { layer: this._poly });
 	},
 
 	_onMarkerDrag: function (e) {
@@ -1459,7 +1459,7 @@ L.Edit.SimpleShape = L.Handler.extend({
 	_fireEdit: function () {
 		this._shape.edited = true;
 		this._shape.fire('edit');
-		this._map.fire('draw:editchange', { layer: this._shape });
+		this._shape._map.fire('draw:editchange', { layer: this._shape });
 	},
 
 	_onMarkerDrag: function (e) {
