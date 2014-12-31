@@ -120,6 +120,14 @@ Triggered when the user has chosen to draw a particular vector or marker.
 | --- | --- | ---
 | layerType | String | The type of layer this is. One of: `polyline`, `polygon`, `rectangle`, `circle`, `marker`
 
+#### draw:drawchange
+
+Triggered for each incremental change during the course of drawing a shape (adding or removing a vertex).
+
+| Property | Type | Description
+| --- | --- | ---
+| layer | [Polyline](http://leafletjs.com/reference.html#polyline)/[Polygon](http://leafletjs.com/reference.html#polygon)/[Rectangle](http://leafletjs.com/reference.html#rectangle)/[Circle](http://leafletjs.com/reference.html#circle)/[Marker](http://leafletjs.com/reference.html#marker) | Layer that changed (and is currently being drawn).
+
 #### draw:drawstop
 
 Triggered when the user has finished a particular vector or marker.
@@ -135,6 +143,14 @@ Triggered when the user starts edit mode by clicking the edit tool button.
 | Property | Type | Description
 | --- | --- | ---
 | handler | String | The type of edit this is. One of: `edit`
+
+#### draw:editchange
+
+Triggered for each incremental change during the course of editing a shape (adding, moving, or removing a vertex).
+
+| Property | Type | Description
+| --- | --- | ---
+| layer | [Polyline](http://leafletjs.com/reference.html#polyline)/[Polygon](http://leafletjs.com/reference.html#polygon)/[Rectangle](http://leafletjs.com/reference.html#rectangle)/[Circle](http://leafletjs.com/reference.html#circle)/[Marker](http://leafletjs.com/reference.html#marker) | Layer that changed (and is currently being edited).
 
 #### draw:editstop
 
