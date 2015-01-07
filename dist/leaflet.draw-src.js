@@ -2102,15 +2102,13 @@ L.Toolbar = L.Class.extend({
 
 		this._modes[type].handler = handler;
 
-		if (buttonIndex >= 0) {
-			this._modes[type].button = this._createButton({
-				title: buttonTitle,
-				className: classNamePredix + '-' + type,
-				container: container,
-				callback: this._modes[type].handler.enable,
-				context: this._modes[type].handler
-			});
-		}
+		this._modes[type].button = this._createButton({
+			title: buttonTitle,
+			className: classNamePredix + '-' + type,
+			container: buttonIndex >= 0 ? container : null,
+			callback: this._modes[type].handler.enable,
+			context: this._modes[type].handler
+		});
 
 		this._modes[type].buttonIndex = buttonIndex;
 
