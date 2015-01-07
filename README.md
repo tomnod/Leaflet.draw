@@ -222,6 +222,7 @@ Polyline and Polygon drawing handlers take the same options.
 | metric | Bool | `true` | Determines which measurement system (metric or imperial) is used.
 | zIndexOffset | Number | `2000` | This should be a high number to ensure that you can draw over all other layers on the map.
 | repeatMode | Bool | `false` | Determines if the draw tool remains enabled after drawing a shape.
+| noButton | Bool | `false` | Set to `true` to not add a "Polyline"/"Polygon" button to the Leaflet toolbar.  You must then control this handler programattically via `myDrawControl._toolbars.draw._modes.polyline.handler`/`myDrawControl._toolbars.draw._modes.polygon.handler`
 
 <a name="polygonoptions" />
 #### PolygonOptions
@@ -239,6 +240,7 @@ Polygon options include all of the Polyline options plus the option to show the 
 | --- | --- | --- | ---
 | shapeOptions | [Leaflet Path options](http://leafletjs.com/reference.html#path-options) | [See code](https://github.com/Leaflet/Leaflet.draw/blob/master/src/draw/handler/Draw.Rectangle.js#L7) | The options used when drawing the rectangle on the map.
 | repeatMode | Bool | `false` | Determines if the draw tool remains enabled after drawing a shape.
+| noButton | Bool | `false` | Set to `true` to not add a "Rectangle" button to the Leaflet toolbar.  You must then control this handler programattically via `myDrawControl._toolbars.draw._modes.rectangle.handler`
 
 <a name="circleoptions" />
 #### CircleOptions
@@ -247,6 +249,7 @@ Polygon options include all of the Polyline options plus the option to show the 
 | --- | --- | --- | ---
 | shapeOptions | [Leaflet Path options](http://leafletjs.com/reference.html#path-options) | [See code](https://github.com/Leaflet/Leaflet.draw/blob/master/src/draw/handler/Draw.Circle.js#L7) | The options used when drawing the circle on the map. 
 | repeatMode | Bool | `false` | Determines if the draw tool remains enabled after drawing a shape.
+| noButton | Bool | `false` | Set to `true` to not add a "Circle" button to the Leaflet toolbar.  You must then control this handler programattically via `myDrawControl._toolbars.draw._modes.circle.handler`
 
 <a name="markeroptions" />
 #### MarkerOptions
@@ -256,6 +259,7 @@ Polygon options include all of the Polyline options plus the option to show the 
 | icon | [Leaflet Icon](http://leafletjs.com/reference.html#icon) | `L.Icon.Default()` | The icon displayed when drawing a marker.
 | zIndexOffset | Number | `2000` | This should be a high number to ensure that you can draw over all other layers on the map.
 | repeatMode | Bool | `false` | Determines if the draw tool remains enabled after drawing a shape.
+| noButton | Bool | `false` | Set to `true` to not add a "Marker" button to the Leaflet toolbar.  You must then control this handler programattically via `myDrawControl._toolbars.draw._modes.marker.handler`
 
 <a name="editoptions" />
 ### EditOptions
@@ -273,6 +277,7 @@ These options will allow you to configure the draw toolbar and its handlers.
 
 | Option | Type | Default | Description
 | --- | --- | --- | ---
+| noButton | Bool | `false` | Set to `true` to not add an "Edit" button to the Leaflet toolbar.  You must then control this handler programattically via `myDrawControl._toolbars.edit._modes.edit.handler`
 | selectedPathOptions | [Leaflet Path options](http://leafletjs.com/reference.html#path-options) | [See code](https://github.com/Leaflet/Leaflet.draw/blob/master/src/edit/handler/EditToolbar.Edit.js#L9) | The path options for how the layers will look while in edit mode. If this is set to null the editable path options will not be set.
 
 **Note:** To maintain the original layer color of the layer use `maintainColor: true` within `selectedPathOptions`.
@@ -293,6 +298,7 @@ E.g. The edit options below will maintain the layer color and set the edit opaci
 
 | Option | Type | Default | Description
 | --- | --- | --- | ---
+| noButton | Bool | `false` | Set to `true` to not add a "Delete" button to the Leaflet toolbar.  You must then control this handler programattically via `myDrawControl._toolbars.edit._modes.remove.handler`
 
 <a name="drawlocal" />
 #### Customizing language and text in Leaflet.draw
