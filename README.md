@@ -1,3 +1,8 @@
+# Changes in this Fork
+
+- Added `'draw:drawchange'` and `'draw:editchange'` events for incremental changes during drawing/editing. (See Readme)
+- Added `noButton` option for all handlers, which requires you to operate the handlers programattically. (See Readme)
+
 # Important
 Leaflet.draw 0.2.3+ requires [Leaflet 0.7](https://github.com/Leaflet/Leaflet/archive/v0.7.zip) or higher.
 
