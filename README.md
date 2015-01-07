@@ -1,6 +1,6 @@
 # Changes in this Fork
 
-- Added `'draw:drawchange'` and `'draw:editchange'` events for incremental changes during drawing/editing. (See Readme)
+- Added `'draw:drawchange'` and `'draw:editchange'` events which are triggered on each incremental change during drawing or editing - anytime a node is added, moved, or deleted. (See Readme)
 - Added `noButton` option for all handlers, which requires you to operate the handlers programattically. (See Readme)
 
 # Important
