@@ -2157,7 +2157,7 @@ L.Toolbar = L.Class.extend({
 
 		L.DomUtil.addClass(this._activeMode.button, 'leaflet-draw-toolbar-button-enabled');
 
-		this._showActionsToolbar();
+		this._actionsContainer && this._showActionsToolbar();
 
 		this.fire('enable');
 	},
@@ -2177,7 +2177,7 @@ L.Toolbar = L.Class.extend({
 			buttons = this.getActions(handler),
 			l = buttons.length,
 			li, di, dl, button;
-
+			
 		// Dispose the actions toolbar (todo: dispose only not used buttons)
 		for (di = 0, dl = this._actionButtons.length; di < dl; di++) {
 			this._disposeButton(this._actionButtons[di].button, this._actionButtons[di].callback);
