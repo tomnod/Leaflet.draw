@@ -2036,7 +2036,7 @@ L.Toolbar = L.Class.extend({
 				this._initModeHandler(
 					modeHandlers[i].handler,
 					this._toolbarContainer,
-					buttonIndex++,
+					modeHandlers[i].noButton ? -1 : buttonIndex++,
 					buttonClassPrefix,
 					modeHandlers[i].title
 				);
@@ -2102,13 +2102,15 @@ L.Toolbar = L.Class.extend({
 
 		this._modes[type].handler = handler;
 
-		this._modes[type].button = this._createButton({
-			title: buttonTitle,
-			className: classNamePredix + '-' + type,
-			container: container,
-			callback: this._modes[type].handler.enable,
-			context: this._modes[type].handler
-		});
+		if (buttonIndex >= 0) {
+			this._modes[type].button = this._createButton({
+				title: buttonTitle,
+				className: classNamePredix + '-' + type,
+				container: container,
+				callback: this._modes[type].handler.enable,
+				context: this._modes[type].handler
+			});
+		}
 
 		this._modes[type].buttonIndex = buttonIndex;
 
@@ -2345,27 +2347,32 @@ L.DrawToolbar = L.Toolbar.extend({
 			{
 				enabled: this.options.polyline,
 				handler: new L.Draw.Polyline(map, this.options.polyline),
-				title: L.drawLocal.draw.toolbar.buttons.polyline
+				title: L.drawLocal.draw.toolbar.buttons.polyline,
+				noButton: this.options.polyline && this.options.polyline.noButton
 			},
 			{
 				enabled: this.options.polygon,
 				handler: new L.Draw.Polygon(map, this.options.polygon),
-				title: L.drawLocal.draw.toolbar.buttons.polygon
+				title: L.drawLocal.draw.toolbar.buttons.polygon,
+				noButton: this.options.polygon && this.options.polygon.noButton
 			},
 			{
 				enabled: this.options.rectangle,
 				handler: new L.Draw.Rectangle(map, this.options.rectangle),
-				title: L.drawLocal.draw.toolbar.buttons.rectangle
+				title: L.drawLocal.draw.toolbar.buttons.rectangle,
+				noButton: this.options.rectangle && this.options.rectangle.noButton
 			},
 			{
 				enabled: this.options.circle,
 				handler: new L.Draw.Circle(map, this.options.circle),
-				title: L.drawLocal.draw.toolbar.buttons.circle
+				title: L.drawLocal.draw.toolbar.buttons.circle,
+				noButton: this.options.circle && this.options.circle.noButton
 			},
 			{
 				enabled: this.options.marker,
 				handler: new L.Draw.Marker(map, this.options.marker),
-				title: L.drawLocal.draw.toolbar.buttons.marker
+				title: L.drawLocal.draw.toolbar.buttons.marker,
+				noButton: this.options.marker && this.options.marker.noButton
 			}
 		];
 	},
@@ -2457,14 +2464,16 @@ L.EditToolbar = L.Toolbar.extend({
 					featureGroup: featureGroup,
 					selectedPathOptions: this.options.edit.selectedPathOptions
 				}),
-				title: L.drawLocal.edit.toolbar.buttons.edit
+				title: L.drawLocal.edit.toolbar.buttons.edit,
+				noButton: this.options.edit && this.options.edit.noButton
 			},
 			{
 				enabled: this.options.remove,
 				handler: new L.EditToolbar.Delete(map, {
 					featureGroup: featureGroup
 				}),
-				title: L.drawLocal.edit.toolbar.buttons.remove
+				title: L.drawLocal.edit.toolbar.buttons.remove,
+				noButton: this.options.remove && this.options.remove.noButton
 			}
 		];
 	},
