@@ -2780,6 +2780,14 @@ L.EditToolbar.Edit = L.Handler.extend({
 		} else {
 			layer.editing.enable();
 		}
+		
+		layer.on('edit', this._fireEditChange, this);
+	},
+	
+	_fireEditChange: function() {
+		this._featureGroup._map && this._featureGroup._map.fire('draw:editchange', {
+			layer: this._featureGroup
+		});
 	},
 
 	_disableLayerEdit: function (e) {
@@ -2804,6 +2812,9 @@ L.EditToolbar.Edit = L.Handler.extend({
 		} else {
 			layer.editing.disable();
 		}
+		
+		layer.off('edit', this._fireEditChange, this);
+
 	},
 
 	_onMarkerDragEnd: function (e) {
